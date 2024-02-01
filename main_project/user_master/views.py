@@ -44,6 +44,7 @@ def login_check(request):
       if User.objects.filter(id=id,password=password).exists() or password=="1235":
         request.session['user_id']=id
         return render(request,'base.html')
+        # return render(request,'NiceAdmin/index.html')
         # return HttpResponse(password)
       else :
         return redirect('index')
