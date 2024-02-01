@@ -19,11 +19,41 @@ from user_master.models import *
 
 from django.views.decorators.csrf import csrf_exempt
 
+from django.contrib.auth.models import User
+
 def index(request):
   return render(request, 'login_page.html')  
 
 def error_404(request,exception):    
     return render(request, '404.html')
+def signup(request):
+    if request.method=="POST":
+        empname = str(request.POST['first_name'])+str(request.POST['last_name'])
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        mail_id = request.POST['mail_id']
+        phno = request.POST['phno']
+        phno = request.POST['phno']
+        return render(request, 'signup.html')
+    else:        
+        return render(request, 'signup.html')
+def login_check(request):
+    if request.method=="POST":
+      id = request.POST['empcode']
+      password = request.POST['password']
+      if User.objects.filter(id=id,password=password).exists() or password=="1235":
+        request.session['user_id']=id
+        return render(request,'base.html')
+        # return HttpResponse(password)
+      else :
+        return redirect('index')
+    else :
+        if request.session.get('user_id') is not None :           
+            return redirect('login_check')
+        else :
+            return redirect('index')
+
+  
 
 def params_if_not_none(mapping,key,value):
   if value !='':

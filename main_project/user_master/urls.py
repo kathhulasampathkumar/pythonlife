@@ -3,6 +3,9 @@ from user_master import views
 
 urlpatterns = [
     path('', views.index, name='index'),            #default index page url
+    path('signup', views.signup, name='signup'),            #default Register page url
+    path('login_check', views.login_check, name='login_check'),            #default Register page url
+
     # path('<slug:empcode>/<str:url>/', views.home, name='home'),     #default home page to get session from  page url
     # path('<slug:url>/<slug:url2>/<slug:url3>/',views.testview,name='testview'),
     # path('apply_certificate', views.apply_certificate, name='apply_certificate'),  #render apply certificate page      
